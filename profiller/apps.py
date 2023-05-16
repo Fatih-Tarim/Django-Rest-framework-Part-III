@@ -5,5 +5,5 @@ class ProfillerConfig(AppConfig):
     name = "profiller"
 
     def ready(self):
-        from profiller.signals import create_profil
+        import profiller.signals 
         
