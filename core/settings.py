@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     ###
     "profiller.apps.ProfillerConfig",
     "rest_framework",
+    "rest_framework.authtoken", #migrate gerekli
+    "dj_rest_auth",
     "django_extensions",
 ]
 
@@ -128,3 +130,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'uploads' 
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication', #Tokenlar ile istek yapılır
+        'rest_framework.authentication.SessionAuthentication', #Browsable api sayfasını görüntülemek için
+    ]
+}
