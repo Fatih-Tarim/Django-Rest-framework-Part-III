@@ -43,6 +43,14 @@ INSTALLED_APPS = [
     "rest_framework.authtoken", #migrate gerekli
     "dj_rest_auth",
     "django_extensions",
+    ##### registration end-pointler için
+
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "dj_rest_auth.registration",
+    "django.contrib.sites",
+
 ]
 
 MIDDLEWARE = [
@@ -138,3 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication', #Browsable api sayfasını görüntülemek için
     ]
 }
+
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = (True,)

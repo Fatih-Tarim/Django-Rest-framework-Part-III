@@ -27,7 +27,7 @@ class ProfilDurum(models.Model):
     user_profil = models.ForeignKey(Profil, on_delete=models.CASCADE)
     durum_mesaji = models.CharField(max_length=240)
     yaratilma_zamani = models.DateTimeField(auto_now_add=True) #auto_now_add -> zaman bir kere alınır ve değişmez
-    guncellenme_tarihi = models.DateTimeField(auto_now=False) #auto_now -> her güncellendiğinde anlık saati alır ve kayıt eder
+    guncellenme_tarihi = models.DateTimeField(auto_now=False, null=True) #auto_now -> her güncellendiğinde anlık saati alır ve kayıt eder
 
     def __str__(self):
         return str(self.user_profil)      

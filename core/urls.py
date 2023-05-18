@@ -5,6 +5,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include('rest_framework.urls')), #Browsable api sayfası için
     path('api/rest-auth/', include('dj_rest_auth.urls')), #dj-rest-auth ile gelen endpointler için
+    path("api/rest-auth/registiration", include('dj_rest_auth.registration.urls')),
     path("api/", include('profiller.api.urls')),
 ]
 
