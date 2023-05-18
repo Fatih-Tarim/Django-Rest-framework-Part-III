@@ -10,6 +10,4 @@ router.register(r'kullanici-profilleri',ProfilViewSet)
 
 urlpatterns = [
     path('',include(router.urls)),
-    # path('kullanici-profilleri/', profil_list, name='profiller'),
-    # path('kullanici-profilleri/<int:pk>', profil_detay, name='profil-detay'),
 ]
