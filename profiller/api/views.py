@@ -6,6 +6,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
 from profiller.api.permissions import SameUserOrReadOnly, StatusOwnerOrReadOnly
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 class ProfilViewSet(
         mixins.ListModelMixin,
@@ -16,11 +17,23 @@ class ProfilViewSet(
     queryset = Profil.objects.all()
     serializer_class = ProfilSerializer
     permission_classes = [IsAuthenticated, SameUserOrReadOnly]
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['sehir', 'user__username']
+    ordering_fields = ['sehir', 'user']
 
 class ProfilDurumViewSet(ModelViewSet):
-    queryset = ProfilDurum.objects.all()
+    # queryset = ProfilDurum.objects.all()
     serializer_class = ProfilDurumSerializer
     permission_classes = [IsAuthenticated, StatusOwnerOrReadOnly]
+
+    def get_queryset(self):
+        queryset = ProfilDurum.objects.all()
+        username = self.request.query_params.get('username', None)
+        if username is not None:
+            queryset = queryset.filter(user_profil__user__username= username)
+        return queryset 
+
+    
 
     #integrity error solution | Durum yaratma esnasında veride bütünlük olması için user_profil nesnesinide vermemiz gerekiyor.
     def perform_create(self, serializer):
